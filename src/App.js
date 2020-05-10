@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
 import './App.css';
+import { CitySelector } from './components/CitySelector';
+import { currentActions, forecastActions } from './actions';
+import { CityCurrentWeather } from './components/CityCurrentWeather';
+import { CityForecast } from './components/CityForecast';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export class App extends React.Component {
+  constructor(props) {
+      super(props);
+      const { dispatch } = this.props;
+      dispatch(currentActions.getCurrent());
+      dispatch(forecastActions.getForecast());
+  }
+
+  render() {
+      return (
+        <>
+          <CitySelector/>
+          <CityCurrentWeather/>
+          <CityForecast/>
+        </>
+      );
+  }
 }
 
-export default App;
+export const ConnectedApp = connect()(App);
