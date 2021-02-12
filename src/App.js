@@ -16,11 +16,11 @@ export class App extends React.Component {
 
   render() {
       return (
-        <>
+        <div style={{marginTop: "30px"}} className="container">
           <CitySelector/>
           <CityCurrentWeather/>
           <CityForecast/>
-        </>
+        </div>
       );
   }
 }
